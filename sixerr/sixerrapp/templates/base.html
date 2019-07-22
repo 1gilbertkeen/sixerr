@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sixerr App</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div>
+        <p>Header</p>
+        <p>
+            {% if user and not user.is_anonymous %}
+              Hello {{ user.get_full_name|default:user.username }}!
+            {% else %}
+              I dont thing we've met before
+            {% endif %}
+        </p>
+        <a href="{% url 'social:begin' 'facebook' %}?next={{request.path}}">Login</a>
+        <a href="{% url 'auth:logout' %}?next={{request.path}}">Logout</a>
+    </div>
+    <hr>
+    {% block page%}
+    {% endblock %}
+    
+    <div>
+        Footer 
+    </div>
+</body>
+</html>

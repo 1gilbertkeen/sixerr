@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path 
+from sixerrapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('social/', include (('social.apps.django_app.urls','social'))),
+    path('auth/', include (('django.contrib.auth.urls', 'auth'))),
+    path('', include(('sixerrapp.urls', 'sixerrapp')))
 ]
+ 
